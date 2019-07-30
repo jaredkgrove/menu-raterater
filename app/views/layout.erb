@@ -6,17 +6,18 @@
   <body>
     <header>
       <nav>
-        <ul>
-          <li><a href="/restaurants">Restaurants</a></li>
-          <li><a href="/menu_items">Menu Items</a></li>
-          <li><a href="/reviews">Reviews</a></li>
+        <!-- <ul> -->
+          <a href="/restaurants">Restaurants</a>
+          <a href="/menu_items">Menu Items</a>
+          <a href="/reviews">Reviews</a>
           <% if Helpers.logged_in?(session) %>
-            <li><a href="/user/<%= Helpers.current_user(session).slug %>">My Reviews</a></li>
+            <a href="/user/<%= Helpers.current_user(session).slug %>">My Reviews</a>
+            <a href="/logout">Log Out</a>
           <% else %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Login</a></li>
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
           <% end %>
-        </ul>
+        <!-- </ul> -->
       </nav>
     </header>
 
