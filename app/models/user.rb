@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
   has_many :menu_items, through: :reviews
   has_many :restaurants, through: :menu_items
   validates_presence_of :name, :password
-  validates_uniqueness_of :name
+  validates_presence_of :unique_slug?
 end

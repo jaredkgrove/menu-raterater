@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
-  get "/menu_items" do
+  get "/:restaurant_slug/menu_items" do
+    @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
     if Helpers.logged_in?(session)
       erb :"menu_items/menu_items"
     else

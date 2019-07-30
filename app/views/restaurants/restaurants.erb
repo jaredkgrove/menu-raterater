@@ -1,0 +1,5 @@
+<h1>Restaurants</h1>
+<%= Restaurants.all.each do |restaurant| %>
+  <strong><%= restaurant.name %></strong>
+  <a href="/<%= restaurant.slug %>/reviews"> Reviews </a>
+<% end %>

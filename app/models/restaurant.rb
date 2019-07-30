@@ -3,5 +3,5 @@ class Restaurant < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   has_many :menu_items
   has_many :ratings, through: :menu_items
-  validates_uniqueness_of :slug
+  validates_presence_of :unique_slug?
 end
