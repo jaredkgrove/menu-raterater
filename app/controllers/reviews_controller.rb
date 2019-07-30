@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
-    get "/:restaurant_slug/:menu_item_slug/reviews" do
-      @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
-      @menu_item = MenuItem.find_by_slug(params[:menu_item_slug])
-      if Helpers.logged_in?(session)
-        erb :"reviews/reviews"
-      else
-        redirect to "/login"
-      end
-    end
+    # get "/:restaurant_slug/:menu_item_slug/reviews" do
+    #   @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
+    #   @menu_item = MenuItem.find_by_slug(params[:menu_item_slug])
+    #   if Helpers.logged_in?(session)
+    #     erb :"reviews/reviews"
+    #   else
+    #     redirect to "/login"
+    #   end
+    # end
 
     get "/:restaurant_slug/reviews/new" do
       @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
@@ -22,6 +22,9 @@ class ReviewsController < ApplicationController
     get "/reviews/:id" do
       if Helpers.logged_in?(session)
         @review = Review.find(params[:id])
+        @menu_item = @review.menu_item
+        @user = @review.user
+        @restaurant = @menu_item.restaurant
         erb :"reviews/show_review"
       else
         redirect to "/login"

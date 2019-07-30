@@ -1,5 +1,10 @@
+<form action="/restaurants" method="post">
+  <label for="new_restaurant_name">New Restaurant: </label>
+  <input id="new_restaurant_name" type="text" name="name" placeholder="Restaurant Name">
+  <input type="submit" value="Add New Restaurant">
+</form>
 <h1>Restaurants</h1>
 <%= Restaurants.all.each do |restaurant| %>
-  <strong><%= restaurant.name %></strong>
-  <a href="/<%= restaurant.slug %>/reviews"> Reviews </a>
+  <strong><%= restaurant.name %> </strong>
+  <a href="/restaurants/<%= restaurant.slug %>"> Menu Items </a>
 <% end %>
