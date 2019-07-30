@@ -1,26 +1,12 @@
-<script>
-  function restaurantCheck() {
-      if (document.getElementById().checked) {
-          document.getElementById('ifYes').style.visibility = 'visible';
-      }
-      else document.getElementById('ifYes').style.visibility = 'hidden';
-
-  }
-</script>
+<h1>Create New Review</h1>
+<h3>Restaurant: <%= @restaurant %></h3><br>
+<h3>Menu Items</h3>
 <form action="/reviews" method="post">
-  <% Restaurant.all.each do |restaurant| %>
-    <input id="restaurant_<%= restaurant.id %>" type="radio" name="review[restaurant_id]" value="<%= restaurant.id %>"><%= restaurant.name %></input>
-  <% end %>
-
-  <h2>Create New Restaurant</h2>
-  <input type="text" name="restaurant[name]" id="new_restaurant_name">
-
-  <% MenuItem.all.each do |menu_item| %>
+  <% @menu_items.each do |menu_item| %>
     <input id="menu_item_<%= menu_item.id %>" type="radio" name="review[menu_item]" value="<%= menu_item.id %>"><%= menu_item.name %></input>
   <% end %>
 
   <h2>Create New Menu Item</h2>
   <input type="text" name="menu_item[name]" id="new_menu_item_name">
-
 
 </form>
