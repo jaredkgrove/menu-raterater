@@ -51,16 +51,16 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
       # raise params.inspect
       if !params[:rating].empty?
-        @review.update(params)
-        redirect to "/tweets/#{@tweet.id}"
+        @review.update(params) #Check params hash to include rating, comment, menu_item, and ???restaurant???
+        redirect to "/reviews/#{@review.id}"
       else
-        redirect to "/tweets/#{@tweet.id}/edit"
+        redirect to "/reviews/#{@review.id}/edit"
       end
     end
 
-    delete  "/tweets/:id" do
-      Tweet.find(params[:id]).destroy if Helpers.logged_in?(session) && Tweet.find(params[:id]).user == Helpers.current_user(session)
-      redirect to "/tweets"
+    delete "/reviews/:id" do
+      Review.find(params[:id]).destroy if Helpers.logged_in?(session) && Review.find(params[:id]).user == Helpers.current_user(session)
+      redirect to "/reviews"
     end
 
 end

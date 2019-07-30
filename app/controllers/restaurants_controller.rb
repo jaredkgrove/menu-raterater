@@ -15,9 +15,9 @@ class RestaurantsController < ApplicationController
   #   end
   # end
 
-  get "/restaurants/:slug" do
+  get "/restaurants/:id" do
     if Helpers.logged_in?(session)
-      @restaurant = Restaurant.find_by_slug(params[:slug])
+      @restaurant = Restaurant.find(params[:id])
       erb :"restaurants/show_restaurant"
     else
       redirect to "/login"
