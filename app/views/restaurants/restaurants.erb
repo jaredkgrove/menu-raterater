@@ -4,7 +4,7 @@
   <input type="submit" value="Add New Restaurant">
 </form>
 <h1>Restaurants</h1>
-<%= Restaurants.all.each do |restaurant| %>
+<% Restaurant.all.each do |restaurant| %>
   <strong><%= restaurant.name %> </strong>
-  <a href="/restaurants/<%= restaurant.slug %>"> Menu Items </a>
+  <a href="/<%= restaurant.slug %>"> Menu Items </a><br>
 <% end %>

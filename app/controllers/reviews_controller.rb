@@ -9,20 +9,21 @@ class ReviewsController < ApplicationController
     #   end
     # end
 
-    get "/:restaurant_slug/reviews/new" do
-      @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
-      @menu_items = @restaurant.menu_items
+    get "/:restaurant_slug/menu_items/:menu_item_id/new_review" do
       if Helpers.logged_in?(session)
+        @menu_item = MenuItem.find(params[:id])
+        @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
+        redirect to "/#{@menu_item.restaurant.slug}/menu_items/#{@menu_item.id}" if !@restaurant.menu_items.include?(@menu_item)
         erb :"reviews/new"
       else
         redirect to "/login"
       end
     end
 
-    get "/reviews/:id" do
+    get "/menu_items/:menu_item_id/:id" do
       if Helpers.logged_in?(session)
         @review = Review.find(params[:id])
-        @menu_item = @review.menu_item
+        @menu_item = Menu
         @user = @review.user
         @restaurant = @menu_item.restaurant
         erb :"reviews/show_review"
