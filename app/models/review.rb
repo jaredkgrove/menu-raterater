@@ -5,10 +5,9 @@ class Review < ActiveRecord::Base
   validates_presence_of :unique_user_menu_item_relation?
 
   def unique_user_menu_item_relation?
-    if self.menu_item.reviews.detect{|review|review.user == self.user}
+    if self.menu_item.reviews.detect{|review|review.user == self.user unless review == self}
     else
       true
     end
   end
 end
- 
