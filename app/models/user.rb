@@ -3,8 +3,10 @@ class User < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   has_secure_password
   has_many :reviews
+
   has_many :menu_items, through: :reviews
   has_many :restaurants, through: :menu_items
   validates_presence_of :name, :password
   validates_presence_of :unique_slug?
 end
+ 

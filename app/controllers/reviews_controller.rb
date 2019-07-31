@@ -9,9 +9,9 @@ class ReviewsController < ApplicationController
     #   end
     # end
 
-    get "/:restaurant_slug/menu_items/:menu_item_id/new_review" do
+    get "/:restaurant_slug/menu_items/:menu_item_id/reviews/new" do
       if Helpers.logged_in?(session)
-        @menu_item = MenuItem.find(params[:id])
+        @menu_item = MenuItem.find(params[:menu_item_id])
         @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
         redirect to "/#{@menu_item.restaurant.slug}/menu_items/#{@menu_item.id}" if !@restaurant.menu_items.include?(@menu_item)
         erb :"reviews/new"
@@ -25,7 +25,8 @@ class ReviewsController < ApplicationController
       @menu_item = MenuItem.find(params[:menu_item_id])
       @user = @review.user
       @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
-      redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}" if !(@review.menu_item == @menu_item && @restaurants.menu_items.includes?(@menu_item))
+      # binding.pry
+      redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}" if !(@review.menu_item == @menu_item && @restaurant.menu_items.include?(@menu_item))
       erb :"reviews/show_review"
     end
 
@@ -43,9 +44,9 @@ class ReviewsController < ApplicationController
     end
 
     post "/:restaurant_slug/menu_items/:menu_item_id/reviews" do
-      review = Review.new(rating: params[:rating], comment: params[:comment], user: Helpers.current_user(session))
+      review = Review.new(rating: params[:rating], comment: params[:comment], user: Helpers.current_user(session), menu_item_id: params[:menu_item_id] )
       if review.save
-        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}/reviews/#{@review.id}"
+        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}/reviews/#{review.id}"
       else
         redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}?error=There was a problem creating the review"
       end

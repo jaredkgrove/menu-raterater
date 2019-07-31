@@ -15,7 +15,7 @@ class MenuItemsController < ApplicationController
   #   else
   #     redirect to "/login"
   #   end
-  # end
+  # endc
 
 
   get "/:restaurant_slug/menu_items/:id" do

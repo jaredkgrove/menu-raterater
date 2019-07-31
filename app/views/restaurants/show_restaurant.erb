@@ -1,8 +1,8 @@
 <h1><%= @restaurant.name %></h1>
 <% @restaurant.menu_items.each do |menu_item| %>
-  <a href="/menu_items/<%= menu_item.id %>"><%= menu_item.name %></a>
-  <i> Average Rating: <%= "TODO" %> </i>
   <a href="/<%= @restaurant.slug %>/menu_items/<%= menu_item.id %>"><%= menu_item.name %></a>
+  <i> Average Rating: <%= "TODO" %> </i><br>
+
 <% end %>
 
 <% if Helpers.logged_in?(session) %>
@@ -12,3 +12,4 @@
     <input type="submit" value="Add New Menu Item">
   </form>
 <% end %>
+ 
