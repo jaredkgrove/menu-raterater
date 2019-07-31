@@ -7,7 +7,6 @@
 <% end %>
 <h1>Restaurants</h1>
 <% Restaurant.all.each do |restaurant| %>
-  <strong><%= restaurant.name %> </strong>
-  <a href="/<%= restaurant.slug %>"> Menu Items </a><br>
+  <a href="/<%= restaurant.slug %>"><strong><%= restaurant.name %> </strong></a><br>
+
 <% end %>
- 

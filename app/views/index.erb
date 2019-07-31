@@ -1,1 +1,13 @@
-<h1>HEllo World</h1>
+<h1>Welcome to the Menu Reviewer!</h1>
+
+<h3>Recent Reviews</h3>
+<% Review.order('id DESC').limit(5).compact.each do |review| %>
+  <strong><a href="/<%= review.menu_item.restaurant.slug %>"><%= review.menu_item.restaurant.name %>: </a></strong>
+  <strong><a href="/<%= review.menu_item.restaurant.slug %>/menu_items/<%= review.menu_item.id %>"><%= review.menu_item.name %></a></strong>
+
+  <div class="review">
+    <i><%= review.user.name %></i>
+    <strong>rating: <%= review.rating %> / 10</strong>
+    <p><%= review.comment %></p>
+  </div>
+<% end %>
