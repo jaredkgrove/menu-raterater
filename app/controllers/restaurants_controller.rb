@@ -8,12 +8,8 @@ class RestaurantsController < ApplicationController
   end
 
   get "/:slug" do
-    if Helpers.logged_in?(session)
-      @restaurant = Restaurant.find_by_slug(params[:slug])
-      erb :"restaurants/show_restaurant"
-    else
-      redirect to "/login"
-    end
+    @restaurant = Restaurant.find_by_slug(params[:slug])
+    erb :"restaurants/show_restaurant"
   end
 
   post "/restaurants" do

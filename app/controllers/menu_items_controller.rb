@@ -26,10 +26,14 @@ class MenuItemsController < ApplicationController
   end
 
   post "/:restaurant_slug/menu_items" do
-    raise params.inspect
-    # @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
-    # @menu_item = MenuItem.new(name:params[:name])
+    restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
+    menu_item = MenuItem.new(name:params[:name], restaurant: restaurant)
 
+    if menu_item.save
+      redirect to "/#{restaurant.slug}/menu_items/#{menu_item.id}"
+    else
+      redirect to "/#{restaurant.slug}/menu_items?error=there was a problem creating the menu item"
+    end
   end
 
   # get "/menu_items/:id/edit" do

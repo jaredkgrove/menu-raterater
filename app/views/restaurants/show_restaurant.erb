@@ -5,9 +5,10 @@
   <a href="/<%= @restaurant.slug %>/menu_items/<%= menu_item.id %>"><%= menu_item.name %></a>
 <% end %>
 
-<form action="/<%= @restaurant.slug %>/menu_items" method="post">
-  <input id="hidden" type="hidden"  name="restaurant_id" value="<%= @restaurant.id %>">
-  <label for="new_menu_item_name">New Menu Item: </label>
-  <input id="new_menu_item_name" type="text" name="name" placeholder="Menu Item Name">
-  <input type="submit" value="Add New Menu Item">
-</form>
+<% if Helpers.logged_in?(session) %>
+  <form action="/<%= @restaurant.slug %>/menu_items" method="post">
+    <label for="new_menu_item_name">New Menu Item: </label>
+    <input id="new_menu_item_name" type="text" name="name" placeholder="Menu Item Name">
+    <input type="submit" value="Add New Menu Item">
+  </form>
+<% end %>
