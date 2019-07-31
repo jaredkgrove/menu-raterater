@@ -1,6 +1,6 @@
-#Menu Reviewer
+# Menu Reviewer
 
-##Usage
+## Usage
 To use this app, just clone, run rake db:migrate and then run shotgun. Read and create reviews for specific menu items from your favorite (or not) restaurants.
 
 ## License
