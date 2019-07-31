@@ -1,12 +1,10 @@
-<h1>Create New Review</h1>
-<h3>Restaurant: <%= @restaurant %></h3><br>
-<h3>Menu Items</h3>
-<form action="/reviews" method="post">
-  <% @menu_items.each do |menu_item| %>
-    <input id="menu_item_<%= menu_item.id %>" type="radio" name="review[menu_item]" value="<%= menu_item.id %>"><%= menu_item.name %></input>
-  <% end %>
+<h1>Create New Review for <strong><%= @menu_item.name %></strong> from <strong><%= @restaurant.name %></strong> %></h1>
 
-  <h2>Create New Menu Item</h2>
-  <input type="text" name="menu_item[name]" id="new_menu_item_name">
+<form action="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews" method="post">
+  <label for="rating">Rating: </label>
+  <input id="rating" type="number" name="rating" min="1" max="10">
+
+  <label for="comment">Comment: </label>
+  <input id="comment" type="text" name="comment">
 
 </form>
