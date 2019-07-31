@@ -1,13 +1,4 @@
 class ReviewsController < ApplicationController
-    # get "/:restaurant_slug/:menu_item_slug/reviews" do
-    #   @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
-    #   @menu_item = MenuItem.find_by_slug(params[:menu_item_slug])
-    #   if Helpers.logged_in?(session)
-    #     erb :"reviews/reviews"
-    #   else
-    #     redirect to "/login"
-    #   end
-    # end
 
     get "/:restaurant_slug/menu_items/:menu_item_id/reviews/new" do
       if Helpers.logged_in?(session)
@@ -66,9 +57,9 @@ class ReviewsController < ApplicationController
       end
     end
 
-    delete "/reviews/:id" do
+    delete "/:restaurant_slug/menu_items/:menu_item_id/reviews/:id" do
       Review.find(params[:id]).destroy if Helpers.logged_in?(session) && Review.find(params[:id]).user == Helpers.current_user(session)
-      redirect to "/reviews"
+      redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}"
     end
 
 end
