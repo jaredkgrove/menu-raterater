@@ -3,12 +3,12 @@
   <%= @menu_item.name %>
 </h1>
 
-<h3>Aerage Rating: <%= "TODO" %></h3>
+<h3>Average Rating: <%= "TODO" %></h3>
 <a href="/<%= @menu_item.restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/new">Add New Review</a><br>
 <% @menu_item.reviews.each do |review| %>
   <div class="review">
     <i><%= review.user.name %></i>
     <strong>rating: <%= review.rating %> / 10</strong>
-    <p><%= review.comment %></p>
+    <p><a href="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= review.id %>"><%= review.comment %></a></p>
   </div>
 <% end %>

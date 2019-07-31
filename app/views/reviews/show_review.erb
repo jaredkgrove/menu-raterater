@@ -8,5 +8,5 @@
 </div>
 
 <% if @user == Helpers.current_user(session) %>
-  <a href="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>/edit"></a>
+  <a href="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>/edit">Edit Review</a>
 <% end %>

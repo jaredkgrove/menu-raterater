@@ -1,12 +1,13 @@
 
-<h1>Create New Review for <strong><%= @menu_item.name %></strong> from <strong><%= @restaurant.name %></strong></h1>
+<h1>Edit Review for <strong><%= @menu_item.name %></strong> from <strong><%= @restaurant.name %></strong></h1>
 
-<form action="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews" method="post">
+<form action="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="rating">Rating: </label>
-  <input id="rating" type="number" name="rating" min="1" max="10">
+  <input id="rating" type="number" name="rating" min="1" max="10" value="<%= @review.rating %>">
 
   <label for="comment">Comment: </label>
-  <input id="comment" type="text" name="comment">
+  <input id="comment" type="text" name="comment" value="<%= @review.comment %>">
 
-  <input type="submit" value="Create Review">
+  <input type="submit" value="Edit Review">
 </form>
