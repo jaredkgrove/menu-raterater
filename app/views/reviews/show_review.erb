@@ -1,0 +1,12 @@
+<h1><%= @restaurant.name %></h1>
+<h3><%= @menu_item.name %></h3>
+
+<div class="review">
+  <i><%= review.user.name %></i>
+  <strong>rating: <%= review.rating %> / 10</strong>
+  <p><%= review.comment %></p>
+</div>
+
+<% if @user == Helpers.current_user %>
+  <a href="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>/edit"></a>
+<% end %>

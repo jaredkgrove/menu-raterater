@@ -20,40 +20,37 @@ class ReviewsController < ApplicationController
       end
     end
 
-    get "/menu_items/:menu_item_id/:id" do
-      if Helpers.logged_in?(session)
-        @review = Review.find(params[:id])
-        @menu_item = Menu
-        @user = @review.user
-        @restaurant = @menu_item.restaurant
-        erb :"reviews/show_review"
-      else
-        redirect to "/login"
-      end
+    get "/:restaurant_slug/menu_items/:menu_item_id/reviews/:id" do
+      @review = Review.find(params[:id])
+      @menu_item = MenuItem.find(params[:menu_item_id])
+      @user = @review.user
+      @restaurant = Restaurant.find_by_slug(params[:restaurant_slug])
+      redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}" if !(@review.menu_item == @menu_item && @restaurants.menu_items.includes?(@menu_item))
+      erb :"reviews/show_review"
     end
 
-    get "/reviews/:id/edit" do
+    get "/:restaurant_slug/menu_items/:menu_item_id/reviews/:id/edit" do
       @review = Review.find(params[:id]) if !Review.where(id:params[:id]).empty?
       if !Helpers.logged_in?(session)
         redirect to "/login"
       elsif !!@review && Helpers.logged_in?(session) && @review.user == Helpers.current_user(session)
-        erb :"tweets/edit_tweet"
+        erb :"reviews/edit_review"
       elsif !!@review
-        redirect to "/reviews/#{@review.id}"
+        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}/reviews/#{params[:id]}"
       else
-        redirect to "/reviews"
+        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}"
       end
     end
-# TODO: creates menu_item and Restaurant if they do not exist
-    post "/reviews" do
-      if !params[:rating].empty?
-        review = Review.create(rating: params[:rating], comment: params[:comment], user: Helpers.current_user(session))
-        redirect to "/reviews/#{review.id}"
+
+    post "/:restaurant_slug/menu_items/:menu_item_id/reviews" do
+      review = Review.new(rating: params[:rating], comment: params[:comment], user: Helpers.current_user(session))
+      if review.save
+        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}/reviews/#{@review.id}"
       else
-        redirect to "/reviews/new"
+        redirect to "/#{params[:restaurant_slug]}/menu_items/#{params[:menu_item_id]}?error=There was a problem creating the review"
       end
     end
-# TODO: creates menu_item and Restaurant if they do not exist
+
     patch "/reviews/:id" do
       @review = Review.find(params[:id])
       # raise params.inspect
