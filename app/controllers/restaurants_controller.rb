@@ -1,10 +1,6 @@
 class RestaurantsController < ApplicationController
   get "/restaurants" do
-    if Helpers.logged_in?(session)
-      erb :"restaurants/restaurants"
-    else
-      redirect to "/login"
-    end
+    erb :"restaurants/restaurants"
   end
 
   get "/:slug" do

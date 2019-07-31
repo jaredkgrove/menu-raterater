@@ -53,7 +53,7 @@ class ReviewsController < ApplicationController
         @review.save
           redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}"
       else
-          redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}/edit"
+          redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}/edit?error=There was a problem updating the review"
       end
     end
 
