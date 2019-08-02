@@ -53,7 +53,13 @@ class ReviewsController < ApplicationController
       else
         @review.update(rating: params[:rating], comment:params[:comment]) #Check params hash to include rating, comment, menu_item, and ???restaurant???
         @review.save
+<<<<<<< HEAD
         redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}"
+=======
+          redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}"
+      else
+          redirect to "/#{@review.menu_item.restaurant.slug}/menu_items/#{@review.menu_item.id}/reviews/#{@review.id}/edit?error=There was a problem updating the review"
+>>>>>>> b9eb60e5cd3be8635e182cac95e6570c80ab2c9a
       end
     end
 
