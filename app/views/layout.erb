@@ -7,14 +7,17 @@
     <header>
       <nav>
         <!-- <ul> -->
+          <a href="/">Home</a>
           <a href="/restaurants">Restaurants</a>
           <% if Helpers.logged_in?(session) %>
-            <a href="/<%= Helpers.current_user(session).slug %>">My Reviews</a>
+            <a href="/users/<%= Helpers.current_user(session).slug %>">My Reviews</a>
             <a href="/logout">Log Out</a>
           <% else %>
             <a href="/login">Login</a>
             <a href="/signup">Sign Up</a>
           <% end %>
+          <br>
+          <br>
         <!-- </ul> -->
       </nav>
     </header>

@@ -9,4 +9,9 @@
 
 <% if @user == Helpers.current_user(session) %>
   <a href="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>/edit">Edit Review</a>
+
+  <form action="/<%= @restaurant.slug %>/menu_items/<%= @menu_item.id %>/reviews/<%= @review.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Review" id="Delete Review">
+  </form>
 <% end %>

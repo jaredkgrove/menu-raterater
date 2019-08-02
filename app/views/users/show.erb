@@ -1,0 +1,21 @@
+<h1><%= @user.name %>'s Reviews</h1>
+
+<% @user.reviews.each do |review| %>
+  <strong><a href="/<%= review.menu_item.restaurant.slug %>"><%= review.menu_item.restaurant.name %>: </a></strong>
+  <strong><a href="/<%= review.menu_item.restaurant.slug %>/menu_items/<%= review.menu_item.id %>"><%= review.menu_item.name %></a></strong>
+
+  <div class="review">
+    <i><%= review.user.name %></i>
+    <strong>rating: <%= review.rating %> / 10</strong>
+    <p><%= review.comment %></p>
+  </div>
+
+  <% if @user == Helpers.current_user(session) %>
+    <a href="/<%= review.menu_item.restaurant.slug %>/menu_items/<%= review.menu_item.id %>/reviews/<%= review.id %>/edit">Edit Review</a>
+
+    <form action="/<%= review.menu_item.restaurant.slug %>/menu_items/<%= review.menu_item.id %>/reviews/<%= review.id %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Review" id="Delete Review">
+    </form>
+  <% end %>
+<% end %>

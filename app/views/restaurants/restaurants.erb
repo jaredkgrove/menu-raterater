@@ -1,13 +1,12 @@
 <% if Helpers.logged_in?(session) %>
-<form action="/restaurants" method="post">
-  <label for="new_restaurant_name">New Restaurant: </label>
-  <input id="new_restaurant_name" type="text" name="name" placeholder="Restaurant Name">
-  <input type="submit" value="Add New Restaurant">
-</form>
+  <form action="/restaurants" method="post">
+    <label for="new_restaurant_name">New Restaurant: </label>
+    <input id="new_restaurant_name" type="text" name="name" placeholder="Restaurant Name">
+    <input type="submit" value="Add New Restaurant">
+  </form>
 <% end %>
 <h1>Restaurants</h1>
 <% Restaurant.all.each do |restaurant| %>
-  <strong><%= restaurant.name %> </strong>
-  <a href="/<%= restaurant.slug %>"> Menu Items </a><br>
+  <a href="/<%= restaurant.slug %>"><strong><%= restaurant.name %> </strong></a><br>
+
 <% end %>
- 

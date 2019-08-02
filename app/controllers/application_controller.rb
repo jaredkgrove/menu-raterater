@@ -13,4 +13,12 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-end 
+  helpers do
+    def redirect_if_not_owner(review)
+      if review.user != Helpers.current_user(session)
+        redirect "/#{review.menu_item.restaurant.slug}/menu_items/#{review.menu_item.id}"
+      end
+    end
+  end
+
+end
